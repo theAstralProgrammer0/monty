@@ -1,5 +1,4 @@
 #include "monty.h"
-#include <stdio.h>
 
 glob_t *glob = NULL;
 
@@ -48,7 +47,7 @@ void stack_init(void)
  */
 void execop(unsigned int line_number)
 {
-	instruction_t insts[3] = {
+	instruction_t insts[4] = {
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
