@@ -68,6 +68,7 @@ extern glob_t *glob;
 /* stack operation functions */
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
 
 /* stack utility functions */
 void stack_init(void);
