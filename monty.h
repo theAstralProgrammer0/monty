@@ -7,6 +7,8 @@
 #include <string.h>
 #include <ctype.h>
 
+#define MAX_TOKENS 2
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -55,6 +57,8 @@ typedef struct global_var
 	stack_t *front;
 	stack_t *rear;
 	char **tokens;
+	FILE *fp;
+	char *buffer;
 } glob_t;
 
 /* external global variable declared */
@@ -66,7 +70,7 @@ void pall(stack_t **stack, unsigned int line_number);
 
 /* stack utility functions */
 void stack_init(void);
-void execop(int line_number);
+void execop(unsigned int line_number);
 void tokenizer(char *line, const char *delim);
 
 /* other function prototypes */
