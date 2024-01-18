@@ -21,6 +21,9 @@ void push(stack_t **stack, unsigned int line_number)
 		return;
 	if(!isNumber(glob->tokens[1]))
 	{
+		fclose(glob->fp);
+		free(glob->buffer);
+		free_glob(glob);
 		dprintf(2, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
@@ -32,6 +35,7 @@ void push(stack_t **stack, unsigned int line_number)
 		dprintf(2, "Error: malloc failed\n");
 		fclose(glob->fp);
 		free(glob->buffer);
+		free_glob(glob);
 		exit(EXIT_FAILURE);
 	}
 	newnode->n = intNumber;

@@ -72,9 +72,9 @@ void execop(unsigned int line_number)
 		}
 	}
 	dprintf(2, "L%u: unknown instruction %s\n", line_number, opcode);
-	//fclose(glob->fp);
-	//free(glob->buffer);
-	//free_glob(glob);
+	fclose(glob->fp);
+	free(glob->buffer);
+	free_glob(glob);
 	exit(EXIT_FAILURE);
 }
 
@@ -139,6 +139,7 @@ int main(int argc, char **argv)
 
 		line_number++;
 	}
+	free(buffer);
 	free(glob->buffer);
 	fclose(glob->fp);
 	free_glob(glob);
