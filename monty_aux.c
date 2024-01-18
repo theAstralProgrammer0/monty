@@ -12,7 +12,6 @@
 
 void free_glob(glob_t *glob)
 {
-	int i;
 	stack_t *current = NULL, *next = NULL;
 
 	if (glob == NULL)
