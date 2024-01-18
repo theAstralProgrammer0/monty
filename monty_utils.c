@@ -17,9 +17,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 	if (glob == NULL)
 		return;
-	if (!(glob->tokens[1]))
-		return;
-	if (!isNumber(glob->tokens[1]))
+	if (glob->tokens[1] == NULL || !(isNumber(glob->tokens[1])))
 	{
 		fclose(glob->fp);
 		free(glob->buffer);
@@ -60,5 +58,5 @@ void push(stack_t **stack, unsigned int line_number)
  */
 void pall(stack_t **stack, unsigned int line_number)
 {
-	printf("HI\n");
+
 }
