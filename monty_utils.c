@@ -10,6 +10,7 @@
  *
  * Return: Nothing
  */
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newnode = NULL;
@@ -22,7 +23,7 @@ void push(stack_t **stack, unsigned int line_number)
 		fclose(glob->fp);
 		free(glob->buffer);
 		free_glob(glob);
-		dprintf(2, "L%u: usage: push integer\n", line_number);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	intNumber = atoi(glob->tokens[1]);
@@ -30,7 +31,7 @@ void push(stack_t **stack, unsigned int line_number)
 	newnode = (stack_t *)malloc(sizeof(stack_t));
 	if (newnode == NULL)
 	{
-		dprintf(2, "Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		fclose(glob->fp);
 		free(glob->buffer);
 		free_glob(glob);
@@ -44,7 +45,7 @@ void push(stack_t **stack, unsigned int line_number)
 		glob->top->prev = newnode;
 	glob->top = newnode;
 }
-
+#pragma GCC diagnostic pop
 
 /**
  * pall - opcode function
@@ -56,6 +57,7 @@ void push(stack_t **stack, unsigned int line_number)
  *
  * Return: Nothing
  */
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = glob->top;
@@ -65,5 +67,5 @@ void pall(stack_t **stack, unsigned int line_number)
 		printf("%d\n", temp->n);
 		temp = temp->next;
 	}
-	return;
 }
+#pragma GCC diagnostic pop
