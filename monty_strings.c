@@ -13,7 +13,7 @@
 int isNumber(const char *digitstr)
 {
 	char *endptr;
-	
+
 	if (digitstr == NULL)
 		return (0);
 
