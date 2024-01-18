@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <fcntl.h>
 #include <ctype.h>
 
 #define MAX_TOKENS 2
@@ -72,6 +73,7 @@ void pall(stack_t **stack, unsigned int line_number);
 void stack_init(void);
 void execop(unsigned int line_number);
 void tokenizer(char *line, const char *delim);
+ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 
 /* other function prototypes */
 void free_glob(glob_t *glob);
