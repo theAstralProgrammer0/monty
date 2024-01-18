@@ -26,7 +26,7 @@ void stack_init(void)
 	glob->stack = stack;
 	glob->fp = NULL;
 	glob->buffer = NULL;
-	
+
 	glob->tokens = malloc(2 * sizeof(char *));
 	if (glob->tokens == NULL)
 	{
@@ -52,7 +52,6 @@ void execop(unsigned int line_number)
 	char *opcode = NULL;
 
 	opcode = glob->tokens[0];
-	printf("opcode (glob->tokens[0]): %s\n", opcode);
 
 	if (opcode == NULL)
 		return;
@@ -103,10 +102,20 @@ void tokenizer(char *line, const char *delim)
 	}
 
 	for (i = token_count; i < MAX_TOKENS; i++)
-		glob->tokens[i] = NULL;	
+		glob->tokens[i] = NULL;
 }
 
-
+/**
+ * main - Entry Point
+ *
+ * Description: Calls all functions for performing monty operations on the
+ * stack
+ *
+ * @argc: Argument count
+ * @argv: Strings array from terminal
+ *
+ * Return: 0 Success, Otherwise Failure
+ */
 int main(int argc, char **argv)
 {
 	char *buffer = NULL, *buffer_copy = NULL;
@@ -123,7 +132,7 @@ int main(int argc, char **argv)
 	glob->fp = fopen(argv[1], "r");
 	if (glob->fp == NULL)
 	{
-		if(glob)
+		if (glob)
 			free_glob(glob);
 		dprintf(2, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
@@ -139,7 +148,6 @@ int main(int argc, char **argv)
 
 		line_number++;
 	}
-	free(buffer);
 	free(glob->buffer);
 	fclose(glob->fp);
 	free_glob(glob);

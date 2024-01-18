@@ -17,13 +17,13 @@ void free_glob(glob_t *glob)
 
 	if (glob == NULL)
 		return;
-	
+
 	if (glob->tokens)
 		free(glob->tokens);
-	
+
 	if (glob->stack && glob->top)
 		current = glob->top;
-	
+
 	while (current)
 	{
 		if (current->next)
