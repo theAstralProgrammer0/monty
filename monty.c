@@ -1,4 +1,5 @@
 #include "monty.h"
+#include <stdio.h>
 
 glob_t *glob = NULL;
 
@@ -13,12 +14,11 @@ void stack_init(void)
 {
 	stack_t *top = NULL;
 	stack_t **stack = &top;
-	size_t inst_num, i;
 
 	glob = malloc(sizeof(glob_t));
 	if (glob == NULL)
 	{
-		dprintf(2, "Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -31,7 +31,7 @@ void stack_init(void)
 	if (glob->tokens == NULL)
 	{
 		free_glob(glob);
-		dprintf(2, "Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -48,6 +48,10 @@ void stack_init(void)
  */
 void execop(unsigned int line_number)
 {
+	instruction_t insts[2] = {
+		{"push", push},
+		{"pall", pall}
+	};
 	int i, num;
 	char *opcode = NULL;
 
@@ -55,10 +59,6 @@ void execop(unsigned int line_number)
 
 	if (opcode == NULL)
 		return;
-	instruction_t insts[2] = {
-		{"push", push},
-		{"pall", pall}
-	};
 
 	num = sizeof(insts) / sizeof(insts[0]);
 
@@ -70,7 +70,7 @@ void execop(unsigned int line_number)
 			return;
 		}
 	}
-	dprintf(2, "L%u: unknown instruction %s\n", line_number, opcode);
+	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 	fclose(glob->fp);
 	free(glob->buffer);
 	free_glob(glob);
@@ -118,13 +118,13 @@ void tokenizer(char *line, const char *delim)
  */
 int main(int argc, char **argv)
 {
-	char *buffer = NULL, *buffer_copy = NULL;
+	char *buffer = NULL;
 	size_t size = 0;
 	unsigned int line_number = 1;
 
 	if (argc != 2)
 	{
-		dprintf(2, "USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -134,10 +134,9 @@ int main(int argc, char **argv)
 	{
 		if (glob)
 			free_glob(glob);
-		dprintf(2, "Error: Can't open file %s\n", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
 
 	while (getline(&buffer, &size, glob->fp) != -1)
 	{
