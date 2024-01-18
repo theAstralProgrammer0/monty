@@ -51,7 +51,8 @@ void execop(unsigned int line_number)
 	instruction_t insts[3] = {
 		{"push", push},
 		{"pall", pall},
-		{"pint", pint}
+		{"pint", pint},
+		{"pop", pop}
 	};
 	int i, num;
 	char *opcode = NULL;

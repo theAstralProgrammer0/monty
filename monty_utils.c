@@ -94,3 +94,32 @@ void pint(stack_t **stack, unsigned int line_number)
 	printf("%d\n", glob->top->n);
 }
 #pragma GCC diagnostic pop
+
+/**
+ * pop - opcode function
+ *
+ * Description: Deletes the element on top of the stack
+ *
+ * @stack: pointer to pointer to the top of the stack
+ * @line_number: line number in file
+ *
+ * Return: Nothing
+ */
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+void pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = glob->top;
+
+	if (glob->top == NULL)
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		fclose(glob->fp);
+		free(glob->buffer);
+		free_glob(glob);
+		exit(EXIT_FAILURE);
+	}
+	
+	glob->top = glob->top->prev;
+	free(temp);
+}
+#pragma GCC diagnostic pop
