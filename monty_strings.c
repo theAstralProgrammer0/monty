@@ -13,11 +13,11 @@
 int isNumber(const char *digitstr)
 {
 	char *endptr;
-	long value = strtol(digitstr, &endptr, 10);
-
+	
 	if (digitstr == NULL)
 		return (0);
 
+	strtol(digitstr, &endptr, 10);
 	if (endptr == digitstr)
 		return (0);
 
