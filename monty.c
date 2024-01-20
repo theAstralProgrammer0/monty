@@ -32,7 +32,7 @@ void stack_init(void)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	
+
 	glob->size = 0;
 }
 
