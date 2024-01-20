@@ -109,7 +109,7 @@ void pop(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	*stack = (*stack)->prev;
+	*stack = (*stack)->next;
 	free(temp);
 	glob->size--;
 }
