@@ -68,7 +68,7 @@ void pchar(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	if (!(65 <= (*stack)->n) && !((*stack)->n <= 90) && !(97 <= (*stack)->n) && !((*stack)->n <= 122) )
+	if ((!(65 <= (*stack)->n) || !((*stack)->n <= 90)) && (!(97 <= (*stack)->n) || !((*stack)->n <= 122)) )
 	{
 		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
 		free(glob->buffer);
