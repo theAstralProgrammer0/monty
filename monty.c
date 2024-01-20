@@ -21,6 +21,7 @@ void stack_init(void)
 
 	/* initialize global structure members */
 	glob->stack = &(glob->front);
+	glob->top = NULL;
 	glob->front = NULL;
 	glob->rear = NULL;
 	glob->fp = NULL;
