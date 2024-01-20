@@ -48,7 +48,7 @@ void stack_init(void)
  */
 void execop(unsigned int line_number)
 {
-	instruction_t insts[4] = {
+	instruction_t insts[INSTRUCTIONS] = {
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
@@ -73,7 +73,6 @@ void execop(unsigned int line_number)
 		}
 	}
 	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
-	fclose(glob->fp);
 	free(glob->buffer);
 	free_glob(glob);
 	exit(EXIT_FAILURE);
@@ -150,7 +149,6 @@ int main(int argc, char **argv)
 		line_number++;
 	}
 	free(glob->buffer);
-	fclose(glob->fp);
 	free_glob(glob);
 	return (0);
 }

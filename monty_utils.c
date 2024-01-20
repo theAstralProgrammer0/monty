@@ -19,7 +19,6 @@ void push(stack_t **stack, unsigned int line_number)
 		return;
 	if (glob->tokens[1] == NULL || !(isNumber(glob->tokens[1])))
 	{
-		fclose(glob->fp);
 		free(glob->buffer);
 		free_glob(glob);
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
@@ -31,7 +30,6 @@ void push(stack_t **stack, unsigned int line_number)
 	if (newnode == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		fclose(glob->fp);
 		free(glob->buffer);
 		free_glob(glob);
 		exit(EXIT_FAILURE);
@@ -82,7 +80,6 @@ void pint(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
-		fclose(glob->fp);
 		free(glob->buffer);
 		free_glob(glob);
 		exit(EXIT_FAILURE);
@@ -107,7 +104,6 @@ void pop(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
-		fclose(glob->fp);
 		free(glob->buffer);
 		free_glob(glob);
 		exit(EXIT_FAILURE);

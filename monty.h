@@ -9,7 +9,7 @@
 #include <ctype.h>
 
 #define MAX_TOKENS 2
-
+#define INSTRUCTIONS 10
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer

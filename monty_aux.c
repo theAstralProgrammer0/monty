@@ -37,5 +37,7 @@ void free_glob(glob_t *glob)
 			break;
 		}
 	}
+	if (glob->fp)
+		fclose(glob->fp);
 	free(glob);
 }
