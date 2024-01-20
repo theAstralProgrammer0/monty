@@ -4,7 +4,7 @@ void swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = NULL;
 
-	if (glob->size < 2)
+	if (stack || glob->size < 2)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
 		free(glob->buffer);
