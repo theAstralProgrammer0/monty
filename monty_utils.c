@@ -118,7 +118,7 @@ void pop(stack_t **stack, unsigned int line_number)
 		free_glob(glob);
 		exit(EXIT_FAILURE);
 	}
-	
+
 	glob->top = glob->top->prev;
 	free(temp);
 }
