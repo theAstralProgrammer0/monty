@@ -51,7 +51,7 @@ void mod(stack_t **stack, unsigned int line_number)
 	}
 
 	temp = (*stack)->next;
-	temp->n -= (*stack)->n;
+	temp->n %= (*stack)->n;
 	temp->prev = NULL;
 	free(*stack);
 	*stack = temp;
