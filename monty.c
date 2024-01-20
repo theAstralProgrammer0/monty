@@ -49,7 +49,7 @@ void stack_init(void)
  */
 void execop(unsigned int line_number)
 {
-	instruction_t insts[11] = {
+	instruction_t insts[12] = {
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
@@ -60,7 +60,8 @@ void execop(unsigned int line_number)
 		{"mul", mul},
 		{"div", custom_div},
 		{"mod", mod},
-		{"pchar", pchar}
+		{"pchar", pchar},
+		{"pstr", pstr}
 	};
 	int i, num;
 	char *opcode = NULL;
