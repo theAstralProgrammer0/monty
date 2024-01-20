@@ -1,0 +1,38 @@
+#Empty line
+
+push 10
+pall    # Extra spaces
+
+# Invalid token counts
+push 10 20 30
+pall
+
+# Empty arguments
+push
+pall
+
+# Edge cases for isNumber
+push +123
+push -456
+push 1e2   # Scientific notation
+push 0xAB  # Hexadecimal
+push "hello"  # Non-numeric string
+
+# Uncommon instructions (assuming they're implemented)
+swap       # Swap top two elements
+add        # Add top two elements
+nop        # No operation
+
+# Extreme stack operations
+push 999999999  # Large integer
+push 0 0 0 0   # Multiple pushes
+pall pall pall  # Multiple calls to pall
+
+# Potential error-inducing cases
+push A       # Non-numeric argument
+unknown_op   # Invalid opcode
+
+# Additional edge cases to consider:
+# - Very long lines (testing buffer handling)
+# - Lines with mixed tabs and spaces (testing tokenization)
+# - Comments within the file (if supported)

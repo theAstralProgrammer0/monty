@@ -11,7 +11,7 @@ void swap(stack_t **stack, unsigned int line_number)
 		free_glob(glob);
 		exit(EXIT_FAILURE);
 	}
-	
+
 	temp = (*stack)->next;
 	(*stack)->next = temp->next;
 	(*stack)->prev = temp;
@@ -20,4 +20,3 @@ void swap(stack_t **stack, unsigned int line_number)
 	temp->next = (*stack);
 	(*stack) = temp;
 }
-
