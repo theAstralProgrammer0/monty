@@ -10,7 +10,6 @@
  *
  * Return: Nothing
  */
-#pragma GCC diagnostic ignored "-Wunused-parameter"
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *newnode = NULL;
@@ -38,14 +37,14 @@ void push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	newnode->n = intNumber;
-	newnode->next = glob->top;
+	newnode->next = *stack;
 	newnode->prev = NULL;
 
-	if (glob->top)
-		glob->top->prev = newnode;
-	glob->top = newnode;
+	if (*stack)
+		(*stack)->prev = newnode;
+	*stack = newnode;
+	glob->size++;
 }
-#pragma GCC diagnostic pop
 
 /**
  * pall - opcode function
@@ -57,10 +56,9 @@ void push(stack_t **stack, unsigned int line_number)
  *
  * Return: Nothing
  */
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-void pall(stack_t **stack, unsigned int line_number)
+void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
-	stack_t *temp = glob->top;
+	stack_t *temp = *stack;
 
 	while (temp != NULL)
 	{
@@ -68,7 +66,6 @@ void pall(stack_t **stack, unsigned int line_number)
 		temp = temp->next;
 	}
 }
-#pragma GCC diagnostic pop
 
 /**
  * pint - opcode function
@@ -80,10 +77,9 @@ void pall(stack_t **stack, unsigned int line_number)
  *
  * Return: Nothing
  */
-#pragma GCC diagnostic ignored "-Wunused-parameter"
 void pint(stack_t **stack, unsigned int line_number)
 {
-	if (glob->top == NULL)
+	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
 		fclose(glob->fp);
@@ -91,9 +87,8 @@ void pint(stack_t **stack, unsigned int line_number)
 		free_glob(glob);
 		exit(EXIT_FAILURE);
 	}
-	printf("%d\n", glob->top->n);
+	printf("%d\n", (*stack)->n);
 }
-#pragma GCC diagnostic pop
 
 /**
  * pop - opcode function
@@ -105,12 +100,11 @@ void pint(stack_t **stack, unsigned int line_number)
  *
  * Return: Nothing
  */
-#pragma GCC diagnostic ignored "-Wunused-parameter"
 void pop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp = glob->top;
+	stack_t *temp = *stack;
 
-	if (glob->top == NULL)
+	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
 		fclose(glob->fp);
@@ -119,7 +113,7 @@ void pop(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	glob->top = glob->top->prev;
+	*stack = (*stack)->prev;
 	free(temp);
+	glob->size--;
 }
-#pragma GCC diagnostic pop

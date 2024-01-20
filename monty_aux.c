@@ -20,8 +20,8 @@ void free_glob(glob_t *glob)
 	if (glob->tokens)
 		free(glob->tokens);
 
-	if (glob->stack && glob->top)
-		current = glob->top;
+	if (glob->stack && *(glob->stack))
+		current = *(glob->stack);
 
 	while (current)
 	{

@@ -60,6 +60,7 @@ typedef struct global_var
 	char **tokens;
 	FILE *fp;
 	char *buffer;
+	size_t size;
 } glob_t;
 
 /* external global variable declared */

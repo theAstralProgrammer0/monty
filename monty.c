@@ -11,9 +11,7 @@ glob_t *glob = NULL;
  */
 void stack_init(void)
 {
-	stack_t *top = NULL;
-	stack_t **stack = &top;
-
+	/* allocate memory for the global structure */
 	glob = malloc(sizeof(glob_t));
 	if (glob == NULL)
 	{
@@ -21,11 +19,12 @@ void stack_init(void)
 		exit(EXIT_FAILURE);
 	}
 
-	glob->top = top;
-	glob->stack = stack;
+	/* initialize global structure members */
+	glob->stack = &(glob->front);
+	glob->front = NULL;
+	glob->rear = NULL;
 	glob->fp = NULL;
 	glob->buffer = NULL;
-
 	glob->tokens = malloc(2 * sizeof(char *));
 	if (glob->tokens == NULL)
 	{
@@ -33,6 +32,8 @@ void stack_init(void)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
+	
+	glob->size = 0;
 }
 
 /**
