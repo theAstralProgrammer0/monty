@@ -17,6 +17,7 @@ void add(stack_t **stack, unsigned int line_number)
 	temp->prev = NULL;
 	free(*stack);
 	*stack = temp;
+	glob->front = *stack;
 	glob->size--;
 }
 
@@ -37,6 +38,7 @@ void sub(stack_t **stack, unsigned int line_number)
 	temp->prev = NULL;
 	free(*stack);
 	*stack = temp;
+	glob->front = *stack;
 	glob->size--;
 }
 
@@ -57,6 +59,7 @@ void mul(stack_t **stack, unsigned int line_number)
 	temp->prev = NULL;
 	free(*stack);
 	*stack = temp;
+	glob->front = *stack;
 	glob->size--;
 }
 
@@ -85,6 +88,7 @@ void custom_div(stack_t **stack, unsigned int line_number)
 	temp->prev = NULL;
 	free(*stack);
 	*stack = temp;
+	glob->front = *stack;
 	glob->size--;
 }
 
@@ -113,5 +117,6 @@ void mod(stack_t **stack, unsigned int line_number)
         temp->prev = NULL;
         free(*stack);
         *stack = temp;
+	glob->front = *stack;
         glob->size--;
 }

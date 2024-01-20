@@ -38,9 +38,17 @@ void push(stack_t **stack, unsigned int line_number)
 	newnode->next = *stack;
 	newnode->prev = NULL;
 
-	if (*stack)
+	if (glob->size == 0)
+	{
+		glob->front = newnode;
+		glob->rear = newnode;
+	}
+	else
+	{
 		(*stack)->prev = newnode;
+	}
 	*stack = newnode;
+	glob->front = *stack;
 	glob->size++;
 }
 
@@ -111,6 +119,7 @@ void pop(stack_t **stack, unsigned int line_number)
 
 	*stack = (*stack)->next;
 	free(temp);
+	glob->front = *stack;
 	glob->size--;
 }
 
