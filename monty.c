@@ -64,6 +64,8 @@ void execop(unsigned int line_number)
 
 	if (opcode == NULL)
 		return;
+	if (strcmp(opcode,"nop") == 0 || strchr(opcode, '#'))
+		return;
 
 	num = sizeof(insts) / sizeof(insts[0]);
 
