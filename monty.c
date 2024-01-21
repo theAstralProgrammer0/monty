@@ -73,8 +73,6 @@ void execop(unsigned int line_number)
 
 	if (opcode == NULL)
 		return;
-	if (strcmp(opcode, "nop") == 0 || strchr(opcode, '#'))
-		return;
 	if (strcmp(opcode, "stack") == 0)
 	{
 		SET_MODE_STACK();
@@ -85,6 +83,8 @@ void execop(unsigned int line_number)
 		SET_MODE_QUEUE();
 		return;
 	}
+	if (strcmp(opcode, "nop") == 0 || strchr(opcode, '#'))
+		return;
 
 	num = sizeof(insts) / sizeof(insts[0]);
 

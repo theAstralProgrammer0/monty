@@ -72,7 +72,7 @@ void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	stack_t *temp = NULL;
 
-	if (glob->mode == USE_STACK)
+	if (glob->mode == USE_STACK || glob->mode == DEFAULT_MODE)
 		temp = *stack;
 	if (glob->mode == USE_QUEUE)
 		temp = glob->front;
@@ -106,10 +106,10 @@ void pint(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	if (glob->mode == USE_STACK)
+	if (glob->mode == USE_STACK || glob->mode == DEFAULT_MODE)
 		temp = *stack;
 	if (glob->mode == USE_QUEUE)
-		temp = glob->rear;
+		temp = glob->front;
 
 	printf("%d\n", temp->n);
 }
