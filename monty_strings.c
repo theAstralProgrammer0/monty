@@ -31,6 +31,18 @@ int isNumber(const char *digitstr)
 }
 
 
+/**
+ * pchar - Aux function
+ *
+ * Description: The opcode pchar prints the char at the top of the stack,
+ * followed by a new line.
+ *
+ * @stack: Double pointer to data structure (stack or queue)
+ *
+ * @line_number: line number in monty file
+ *
+ * Return: 1 Success, O Failure
+ */
 void pchar(stack_t **stack, unsigned int line_number)
 {
 	if (glob->size < 1)
@@ -41,7 +53,8 @@ void pchar(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	if ((!(65 <= (*stack)->n) || !((*stack)->n <= 90)) && (!(97 <= (*stack)->n) || !((*stack)->n <= 122)) )
+	if ((!(65 <= (*stack)->n) || !((*stack)->n <= 90)) &&
+			(!(97 <= (*stack)->n) || !((*stack)->n <= 122)))
 	{
 		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
 		free(glob->buffer);
@@ -53,6 +66,18 @@ void pchar(stack_t **stack, unsigned int line_number)
 	putchar('\n');
 }
 
+/**
+ * pstr - Aux function
+ *
+ * Description: The opcode pstr prints the string starting at the top of the
+ * stack, followed by a new line.
+ *
+ * @stack: Double pointer to data structure (stack or queue)
+ *
+ * @line_number: line number in monty file
+ *
+ * Return: 1 Success, O Failure
+ */
 void pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
 	stack_t *temp = NULL;
@@ -66,7 +91,7 @@ void pstr(stack_t **stack, __attribute__((unused))unsigned int line_number)
 	temp = *stack;
 	while (temp)
 	{
-		if (1 <= temp->n && temp->n <= 127)
+		if (temp->n >= 1 && temp->n <= 127)
 		{
 			putchar(temp->n);
 			temp = temp->next;

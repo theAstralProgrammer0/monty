@@ -46,12 +46,16 @@ typedef struct instruction_s
 
 /**
  * struct global_var - global struct and its members
- * 
+ *
  * @stack: pointer to the top pointer of the stack
  * @top: pointer to the top node of the stack
  * @front: pointer to front of the queue
  * @rear: pointer to rear of the queue
  * @tokens: string array containing tokens
+ * @fp: file pointer
+ * @buffer: input buffer
+ * @size: size of the doubly-link list (stack or queue)
+ * @mode: mode of operation of the program
  *
  * Description: global struct containing all features of the stack (or queues)
  */
@@ -94,11 +98,12 @@ void insert_at_front(__attribute__((unused))stack_t **stack, int number);
 void insert_at_index(stack_t **stack, int number, unsigned int index);
 void delete_node(stack_t *entry);
 void append(stack_t **stack, int number);
-void pop_at_index(stack_t **stack, unsigned int line_number, unsigned int index);
+void pop_at_index(stack_t **stack, unsigned int line_number, unsigned int idx);
 
 /* stack utility functions */
 void stack_init(void);
-void execop(unsigned int line_number);
+void getops(unsigned int line_number);
+void execops(char *opcode, unsigned int line_number);
 void tokenizer(char *line, const char *delim);
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 

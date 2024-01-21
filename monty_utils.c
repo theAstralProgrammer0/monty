@@ -1,5 +1,15 @@
 #include "monty.h"
-
+/**
+ * insert_at_front - Aux Function
+ *
+ * Description: This function insert a node at front of the list
+ *
+ * @stack: Double pointer to the data structure (stack or queue)
+ *
+ * @number: n member of node to be inserted into the list
+ *
+ * Return: Nothing.
+ */
 void insert_at_front(__attribute__((unused))stack_t **stack, int number)
 {
 	stack_t *newnode = NULL;
@@ -13,10 +23,23 @@ void insert_at_front(__attribute__((unused))stack_t **stack, int number)
 	newnode->prev = NULL;
 	glob->front->prev = newnode;
 	glob->front = newnode;
-	
+
 	glob->size++;
 }
 
+/**
+ * insert_at_index - Aux Function
+ *
+ * Description: This function inserts a node at an index of the list
+ *
+ * @stack: Double pointer to the data structure (stack or queue)
+ *
+ * @number: n member of the node to be inserted
+ *
+ * @index: index
+ *
+ * Return: Nothing.
+ */
 void insert_at_index(stack_t **stack, int number, unsigned int index)
 {
 	stack_t *newnode = NULL;
@@ -61,6 +84,15 @@ void insert_at_index(stack_t **stack, int number, unsigned int index)
 	glob->size++;
 }
 
+/**
+ * delete_node - Aux Function
+ *
+ * Description: This function deletes a node at an index of the list
+ *
+ * @entry: pointer to node to be deleted
+ *
+ * Return: Nothing.
+ */
 void delete_node(stack_t *entry)
 {
 	if (entry == NULL)
@@ -68,7 +100,7 @@ void delete_node(stack_t *entry)
 
 	entry->next->prev = entry->prev;
 	entry->prev->next = entry->next;
-        entry->next = NULL;
-        entry->prev = NULL;
-        free(entry);
+	entry->next = NULL;
+	entry->prev = NULL;
+	free(entry);
 }

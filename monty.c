@@ -39,34 +39,16 @@ void stack_init(void)
 }
 
 /**
- * execop - Aux function
+ * getops - Aux function
  *
- * Description: This executes the monty operation based on the opcode passed as
- * token
+ * Description: This sets the program mode and calls the executing function
  *
  * @line_number: line number of the instruction
  *
  * Return: Nothing
  */
-void execop(unsigned int line_number)
+void getops(unsigned int line_number)
 {
-	instruction_t insts[14] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"add", add},
-		{"sub", sub},
-		{"mul", mul},
-		{"div", custom_div},
-		{"mod", mod},
-		{"pchar", pchar},
-		{"pstr", pstr},
-		{"rotl", rotl},
-		{"rotr", rotr}
-	};
-	int i, num;
 	char *opcode = NULL;
 
 	opcode = glob->tokens[0];
@@ -85,6 +67,41 @@ void execop(unsigned int line_number)
 	}
 	if (strcmp(opcode, "nop") == 0 || strchr(opcode, '#'))
 		return;
+
+	execops(opcode, line_number);
+}
+
+/**
+ * execops - Aux function
+ *
+ * Description: This executes the monty operation based on the opcode passed as
+ * token
+ *
+ * @opcode: opcode from monty file
+ *
+ * @line_number: line number of the instruction
+ *
+ * Return: Nothing
+ */
+void execops(char *opcode, unsigned int line_number)
+{
+	instruction_t insts[14] = {
+		{"push", push},
+		{"pall", pall},
+		{"pint", pint},
+		{"pop", pop},
+		{"swap", swap},
+		{"add", add},
+		{"sub", sub},
+		{"mul", mul},
+		{"div", custom_div},
+		{"mod", mod},
+		{"pchar", pchar},
+		{"pstr", pstr},
+		{"rotl", rotl},
+		{"rotr", rotr}
+	};
+	int i, num;
 
 	num = sizeof(insts) / sizeof(insts[0]);
 
@@ -168,7 +185,7 @@ int main(int argc, char **argv)
 		glob->buffer = buffer;
 
 		tokenizer(buffer, " \t\n");
-		execop(line_number);
+		getops(line_number);
 
 		line_number++;
 	}
