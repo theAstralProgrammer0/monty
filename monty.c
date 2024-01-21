@@ -34,6 +34,7 @@ void stack_init(void)
 		exit(EXIT_FAILURE);
 	}
 
+	glob->mode = DEFAULT_MODE;
 	glob->size = 0;
 }
 
@@ -72,8 +73,18 @@ void execop(unsigned int line_number)
 
 	if (opcode == NULL)
 		return;
-	if (strcmp(opcode,"nop") == 0 || strchr(opcode, '#'))
+	if (strcmp(opcode, "nop") == 0 || strchr(opcode, '#'))
 		return;
+	if (strcmp(opcode, "stack") == 0)
+	{
+		SET_MODE_STACK();
+		return;
+	}
+	if (strcmp(opcode, "queue") == 0)
+	{
+		SET_MODE_QUEUE();
+		return;
+	}
 
 	num = sizeof(insts) / sizeof(insts[0]);
 

@@ -9,7 +9,11 @@
 #include <ctype.h>
 
 #define MAX_TOKENS 2
-#define INSTRUCTIONS 10
+
+#define USE_STACK 2
+#define USE_QUEUE 1
+#define DEFAULT_MODE 0
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -61,10 +65,15 @@ typedef struct global_var
 	FILE *fp;
 	char *buffer;
 	size_t size;
+	int mode;
 } glob_t;
 
 /* external global variable declared */
 extern glob_t *glob;
+
+#define SET_MODE_STACK() (glob->mode = USE_STACK)
+#define SET_MODE_QUEUE() (glob->mode = USE_QUEUE)
+#define SET_MODE_DEFAULT() (glob->mode = DEFAULT_MODE)
 
 /* stack operation functions */
 void push(stack_t **stack, unsigned int line_number);

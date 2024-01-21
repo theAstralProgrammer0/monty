@@ -26,6 +26,12 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 	intNumber = atoi(glob->tokens[1]);
 
+	if (glob->mode == USE_QUEUE)
+	{
+		append(stack, intNumber);
+		return;
+	}
+
 	newnode = (stack_t *)malloc(sizeof(stack_t));
 	if (newnode == NULL)
 	{
