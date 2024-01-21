@@ -81,6 +81,11 @@ void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
+void insert_at_front(__attribute__((unused))stack_t **stack, int number);
+void insert_at_index(stack_t **stack, int number, unsigned int index);
+void delete_node(stack_t *entry);
+void append(stack_t **stack, int number);
+void pop_at_index(stack_t **stack, unsigned int line_number, unsigned int index);
 
 /* stack utility functions */
 void stack_init(void);

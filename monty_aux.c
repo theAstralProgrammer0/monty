@@ -32,6 +32,47 @@ void append(stack_t **stack, int number)
         glob->size++;
 }
 
+void pop_at_index(stack_t **stack, unsigned int line_number, unsigned int index)
+{
+	stack_t *temp = NULL;
+	stack_t *entry = NULL;
+	unsigned int i;
+
+	if (index > glob->size - 1)
+		return;
+
+	if (index == 0)
+		pop(stack, line_number);
+
+	if (index == glob->size - 1)
+	{
+		temp = glob->rear;
+		temp->prev->next = NULL;
+		glob->rear = temp->prev;
+		temp->prev = NULL;
+		free(temp);
+	}
+	else
+	{
+		if (index >= glob->size - index - 1)
+		{
+			entry = glob->rear;
+			for (i = 0; i < glob->size - index - 1; i++)
+				entry = entry->prev;
+			delete_node(entry);
+		}
+		else if (index < glob->size - index - 1)
+		{
+			entry = glob->front;
+			for (i = 0; i < index; i++)
+				entry = entry->next;
+			delete_node(entry);
+		}
+	}
+	glob->size--;
+}
+
+
 void rotl(stack_t **stack, unsigned int line_number)
 {
 	int num;
@@ -42,6 +83,18 @@ void rotl(stack_t **stack, unsigned int line_number)
 	num = glob->front->n;
 	pop(stack, line_number);
 	append(stack, num);
+}
+
+void rotr(stack_t **stack, unsigned int line_number)
+{
+	int num;
+
+	if (glob->size < 2)
+		return;
+	
+	num = glob->rear->n;
+	pop_at_index(stack, line_number, glob->size - 1);
+	insert_at_index(stack, num, 0);
 }
 
 /**
