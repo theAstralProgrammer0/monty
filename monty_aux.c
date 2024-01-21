@@ -1,12 +1,9 @@
 #include "monty.h"
 
-void append(stack_t **stack, int number)
+void append(__attribute__((unused))stack_t **stack, int number)
 {
         stack_t *newnode = NULL;
 
-        if (*stack == NULL)
-                return;
-        
         newnode = (stack_t *)malloc(sizeof(stack_t));
         if (newnode == NULL)
         {

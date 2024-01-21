@@ -70,7 +70,12 @@ void push(stack_t **stack, unsigned int line_number)
  */
 void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
 {
-	stack_t *temp = *stack;
+	stack_t *temp = NULL;
+
+	if (glob->mode == USE_STACK)
+		temp = *stack;
+	if (glob->mode == USE_QUEUE)
+		temp = glob->front;
 
 	while (temp != NULL)
 	{
@@ -91,6 +96,8 @@ void pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
  */
 void pint(stack_t **stack, unsigned int line_number)
 {
+	stack_t *temp = NULL;
+
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
@@ -98,7 +105,13 @@ void pint(stack_t **stack, unsigned int line_number)
 		free_glob(glob);
 		exit(EXIT_FAILURE);
 	}
-	printf("%d\n", (*stack)->n);
+
+	if (glob->mode == USE_STACK)
+		temp = *stack;
+	if (glob->mode == USE_QUEUE)
+		temp = glob->rear;
+
+	printf("%d\n", temp->n);
 }
 
 /**
